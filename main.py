@@ -1,6 +1,6 @@
 """
 This file contains code for the application "gemini-pro-cli".
-Original Author: GlobalCreativeApkDev
+Author: GlobalCreativeApkDev
 """
 
 
@@ -81,7 +81,6 @@ def main() -> int:
         "temperature": float_temperature,
         "top_p": float_top_p,
         "top_k": float_top_k,
-        "max_input_tokens": int_max_input_tokens,
         "max_output_tokens": int_max_output_tokens,
     }
 
@@ -138,7 +137,7 @@ def main() -> int:
             return 0
         try:
             convo.send_message(prompt)
-            console.print(Markdown("AI: " + str(convo.last.text)))
+            console.print(Markdown("AI (" + mdl + "): " + str(convo.last.text)))
             console.print(Markdown("---"))
         except genai.types.generation_types.BlockedPromptException:
             print("AI: Sorry! Cannot generate response.")
