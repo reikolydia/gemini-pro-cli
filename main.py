@@ -1,6 +1,6 @@
 """
 This file contains code for the application "gemini-pro-cli".
-Author: GlobalCreativeApkDev
+Original Author: GlobalCreativeApkDev
 """
 
 
