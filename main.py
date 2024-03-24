@@ -1,6 +1,6 @@
 """
 This file contains code for the application "gemini-pro-cli".
-Author: GlobalCreativeApkDev
+Original Author: GlobalCreativeApkDev
 """
 
 
@@ -14,6 +14,7 @@ from mpmath import mp, mpf
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.table import Table
+from rich.prompt import Prompt
 
 mp.pretty = True
 console = Console()
@@ -110,7 +111,7 @@ def main() -> int:
                                   generation_config=generation_config,
                                   safety_settings=safety_settings)
 
-    table = Table(title="Configuration")
+    table = Table(title="Current Configuration", title_style="red on white bold", caption="To end a chat session, just send an empty prompt")
     table.add_column("Model", justify="right")
     table.add_column(str(mdl))
 
@@ -124,6 +125,7 @@ def main() -> int:
             table.add_row("Max output tokens", str(int_max_output_tokens) + " / " + str(i.output_token_limit))
 
     console.print(table)
+
     console.print(Markdown("---"))
     
 
@@ -131,16 +133,17 @@ def main() -> int:
     ])
 
     while True:
-        prompt: str = input("User: ")
+        prompt: str = Prompt.ask("[blue bold]User[/blue bold]")
         print("")
         if prompt == "":
             return 0
         try:
             convo.send_message(prompt)
-            console.print(Markdown("AI (" + mdl + "): " + str(convo.last.text)))
+            console.print("[red bold]AI (" + mdl + ")[/red bold]: ")
+            console.print(Markdown(str(convo.last.text)))
             console.print(Markdown("---"))
         except genai.types.generation_types.BlockedPromptException:
-            print("AI: Sorry! Cannot generate response.")
+            console.print("[red bold]AI (" + mdl + ")[/red bold]: [red on white bold]Sorry! Cannot generate response![/red on white bold]")
 
 
 if __name__ == '__main__':
