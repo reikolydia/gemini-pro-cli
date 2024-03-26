@@ -116,7 +116,7 @@ def main() -> int:
     table.add_column(str(mdl))
 
     for i in genai.list_models():
-        if str(i.name)[7:] == "gemini-pro":
+        if str(i.name)[7:] == mdl:
             table.add_row("Description", str(i.description))
             table.add_row("Temperature", str(float_temperature) + " / " + str(i.temperature))
             table.add_row("Top P", str(float_top_p) + " / " + str(i.top_p))
