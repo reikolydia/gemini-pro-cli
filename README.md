@@ -2,12 +2,21 @@
 
 This application allows users to use Gemini Pro on command-line interface (CLI).
 
-# Source Code
+# Original Source Code
 
-The source code for the Gemini Pro CLI application is available in 
+The original source code for the Gemini Pro CLI application is available at 
 https://github.com/GlobalCreativeApkDev/gemini-pro-cli/blob/master/main.py.
 
-# Installation
+> This fork just makes it look more presentable..
+
+To-do:
+- [ ] Add customizable system instructions
+- [ ] Add ability to upload media
+- [ ] Add ability to generate media, like images, saved to local disk
+- [ ] Add menus to select models at the start
+
+
+# Original Installation Instructions
 
 ```
 pip install gemini-pro-cli
