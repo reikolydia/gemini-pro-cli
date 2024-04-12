@@ -134,10 +134,15 @@ def main() -> int:
 
     while True:
         prompt: str = Prompt.ask("[blue bold]User[/blue bold]")
-        print("")
         if prompt == "":
             return 0
         try:
+            tokencount = model.count_tokens(prompt).total_tokens
+            if convo.history != []:
+                total_tokencount = model.count_tokens(convo.history).total_tokens
+                console.print("Token count of \"" + prompt + "\": " + str(tokencount) + " | Total tokens so far: " + str(total_tokencount))
+            else:
+                console.print("Token count of \"" + prompt + "\": " + str(tokencount))
             convo.send_message(prompt)
             console.print("[red bold]AI (" + mdl + ")[/red bold]: ")
             console.print(Markdown(str(convo.last.text)))
