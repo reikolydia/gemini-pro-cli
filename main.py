@@ -3,9 +3,7 @@ This file contains code for the application "gemini-pro-cli".
 Original Author: GlobalCreativeApkDev
 """
 
-
 # Importing necessary libraries
-
 
 import google.generativeai as genai
 import os
@@ -19,9 +17,7 @@ from rich.prompt import Prompt
 mp.pretty = True
 console = Console()
 
-
 # Creating static function to be used in this application.
-
 
 def is_number(string: str) -> bool:
     try:
@@ -30,9 +26,7 @@ def is_number(string: str) -> bool:
     except ValueError:
         return False
 
-
 # Creating main function used to run the application.
-
 
 def main() -> int:
     """
@@ -107,16 +101,32 @@ def main() -> int:
 #   Alternative model: gemini-1.5-pro-latest
 #   Old model: gemini-pro
     mdl = "gemini-pro"
-    model = genai.GenerativeModel(model_name=mdl,
-                                  generation_config=generation_config,
-                                  safety_settings=safety_settings)
+
+    if mdl == "gemini-1.5-pro-latest":
+        console.print("[red bold]System instructions[/red bold] enable users to steer the behavior of the model based on their specific needs and use cases. When you set a [red bold]system instruction[/red bold], you give the model additional context to understand the task, provide more customized responses, and adhere to specific guidelines over the full user interaction with the model.")
+        si_prompt: str = Prompt.ask("[red bold]Custom system instructions[/red bold]")
+        if si_prompt == "":
+            console.print("No instructions provided.")
+            model = genai.GenerativeModel(model_name=mdl,
+                                    generation_config=generation_config,
+                                    safety_settings=safety_settings)
+        else:
+            sys_i = str(si_prompt)
+            model = genai.GenerativeModel(model_name=mdl,
+                                    generation_config=generation_config,
+                                    safety_settings=safety_settings,
+                                    system_instruction=sys_i)
+    else:
+        model = genai.GenerativeModel(model_name=mdl,
+                                    generation_config=generation_config,
+                                    safety_settings=safety_settings)
 
     table = Table(title="Current Configuration", title_style="red on white bold", caption="To end a chat session, just send an empty prompt")
     table.add_column("Model", justify="right")
     table.add_column(str(mdl))
 
     for i in genai.list_models():
-        if str(i.name)[7:] == mdl:
+        if str(i.name)[7:] == "gemini-pro":
             table.add_row("Description", str(i.description))
             table.add_row("Temperature", str(float_temperature) + " / " + str(i.temperature))
             table.add_row("Top P", str(float_top_p) + " / " + str(i.top_p))
@@ -128,7 +138,6 @@ def main() -> int:
 
     console.print(Markdown("---"))
     
-
     convo = model.start_chat(history=[
     ])
 
@@ -143,13 +152,14 @@ def main() -> int:
                 console.print("Token count of \"" + prompt + "\": " + str(tokencount) + " | Total tokens so far: " + str(total_tokencount))
             else:
                 console.print("Token count of \"" + prompt + "\": " + str(tokencount))
-            convo.send_message(prompt)
+            response = convo.send_message(prompt)
+            reply_tokencount = model.count_tokens(convo.history[-1]).total_tokens
             console.print("[red bold]AI (" + mdl + ")[/red bold]: ")
-            console.print(Markdown(str(convo.last.text)))
+            console.print(Markdown(str(response.text)))
+            console.print("Token count of response: " + str(reply_tokencount))
             console.print(Markdown("---"))
         except genai.types.generation_types.BlockedPromptException:
             console.print("[red bold]AI (" + mdl + ")[/red bold]: [red on white bold]Sorry! Cannot generate response![/red on white bold]")
-
 
 if __name__ == '__main__':
     main()

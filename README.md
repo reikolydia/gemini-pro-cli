@@ -10,10 +10,13 @@ https://github.com/GlobalCreativeApkDev/gemini-pro-cli/blob/master/main.py.
 > This fork just makes it look more presentable..
 
 To-do:
-- [ ] Add customizable system instructions
+- [x] Add token counts
+- [ ] Add menus to select models at the start
+
+Gemini 1.5 Pro To-dos:
+- [x] Add customizable system instructions
 - [ ] Add ability to upload media
 - [ ] Add ability to generate media, like images, saved to local disk
-- [ ] Add menus to select models at the start
 
 
 # Original Installation Instructions
