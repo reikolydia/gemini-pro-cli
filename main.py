@@ -3,19 +3,8 @@ This file contains code for the application "gemini-pro-cli".
 Original Author: GlobalCreativeApkDev
 """
 
-# todo
-# 1. mouse scroll in chat cell
-# 2. catch errors and display in error popup
-#    - errors like: google.generativeai.types.generation_types.StopCandidateException: index: 0 | finish_reason: RECITATION
-#    - to generate the RECITATION error, use this prompt:
-#      Count from 1 to 100, print numbers as words
-# 3. BETTER beautify the output from the ai
-# 4. when selecting items from menu, it should first center on pre-selected item
-# 5. after selection, it should center on previously selected item
-# 6. - done - adding cancel button in select model page
-# 7. catch quit, to popup confirming quit
-# 8. - done - save chats to disk as text files
-# 9. allow user to choose save destination
+# To generate the RECITATION error, use this prompt:
+# Count from 1 to 100, print numbers as words
 
 # Importing necessary libraries
 
