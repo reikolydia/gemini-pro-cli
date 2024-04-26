@@ -45,6 +45,7 @@ Pre-requisites:
 cd <GEMINI_PRO_CLI_DIRECTORY>
 python -m venv gemini
 <GEMINI_PRO_CLI_DIRECTORY>/Scripts/activate
+pip install -r requirements.txt
 ```
 
 4. Run the application
