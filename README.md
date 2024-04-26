@@ -11,7 +11,12 @@ https://github.com/GlobalCreativeApkDev/gemini-pro-cli/blob/master/main.py.
 
 To-do:
 - [x] Add token counts
-- [ ] Add menus to select models at the start
+- [x] Add ability to change model
+- [x] Add ability to edit temperature
+- [ ] Add ability to edit TOP P
+- [ ] Add ability to edit TOP K
+- [ ] Add ability to edit max input tokens
+- [ ] Add ability to edit max output tokens
 
 Gemini 1.5 Pro To-dos:
 - [x] Add customizable system instructions
